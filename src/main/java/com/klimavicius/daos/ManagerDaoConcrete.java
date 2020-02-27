@@ -115,7 +115,7 @@ public class ManagerDaoConcrete implements ManagerDao {
 	}
 
 	@Override
-	public Manager updateManager(String value, Manager m) {
+	public int updateManager(String value, Manager m) {
 		
 		int manager_id = m.getManagerId();
 		ResultSet rs = null;
@@ -164,11 +164,11 @@ public class ManagerDaoConcrete implements ManagerDao {
 			default:
 				break;
 		}
-		return m;
+		return 0;
 	}
 
 	@Override
-	public int deleteEmployee(Manager m) {
+	public int deleteManager(Manager m) {
 		
 		String sql = "delete from managers where manager_id = ?";
 		int manager_id = m.getManagerId();

@@ -112,7 +112,7 @@ public class EmployeeDaoConcrete implements EmployeeDao{
 	}
 
 	@Override
-	public Employee updateEmployee(String value, Employee e) {
+	public int updateEmployee(String value, Employee e) {
 		
 		int employee_id = e.getEmployeeId();
 		ResultSet rs = null;
@@ -161,7 +161,7 @@ public class EmployeeDaoConcrete implements EmployeeDao{
 			default:
 				break;
 		}
-		return e;
+		return 0;
 	}
 
 	@Override

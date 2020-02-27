@@ -10,7 +10,7 @@ public interface ManagerDao {
 	public Manager getManagerByEmail(String s);
 	public Manager getManagerById(int id);
 	public int createManager(Manager m);
-	public Manager updateManager(String value, Manager m);
-	public int deleteEmployee(Manager m);
+	public int updateManager(String value, Manager m);
+	public int deleteManager(Manager m);
 
 }

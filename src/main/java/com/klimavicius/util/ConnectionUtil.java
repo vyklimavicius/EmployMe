@@ -1,6 +1,5 @@
 package com.klimavicius.util;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -15,6 +14,14 @@ public class ConnectionUtil {
         String password = "Cotiweco1";
 
         if (connection == null || connection.isClosed()) {
+
+            // register connection
+            try {
+                Class.forName("org.postgresql.Driver");
+            } catch (ClassNotFoundException ex) {
+                System.out.println("Error: unable to load driver class!");
+                System.exit(1);
+            }
             // Start connection
             connection = DriverManager.getConnection(url, username, password);
         }

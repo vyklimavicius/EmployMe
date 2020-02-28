@@ -28,15 +28,12 @@ public class RequestHelper {
 
             switch(url) {
 			case "employees":
-				// process request with bird delegate
 				employeeDelegate.getAllEmployees(req, resp);
 				break;
 			case "managers":
-				// process request with habitat delegate
 				managerDelegate.getAllManagers(req, resp);
 				break;
 			case "reimbursements":
-				// process request with habitat delegate
 				reimbursementDelegate.getAllReimbursements(req, resp);
 				break;
 			default:
@@ -44,7 +41,6 @@ public class RequestHelper {
 			}
 			
 		} else {
-			//requesting a view
 			viewDelegate.resolveView(req, resp);
 		}
     }

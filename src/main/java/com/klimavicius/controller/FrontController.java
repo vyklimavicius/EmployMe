@@ -9,34 +9,39 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.catalina.servlets.DefaultServlet;
 
-
-
 @WebServlet("/")
 public class FrontController extends DefaultServlet {
 
     private RequestHelper requestHelper = new RequestHelper();
 
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+    
     public FrontController() {
         super();
     }
 
-     /**
-      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-     */
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String path = request.getRequestURI().substring(request.getContextPath().length());
-		System.out.println(path);
-		if(path.startsWith("/static/")) {
-			super.doGet(request, response);
-		} else {
-			// route GET request to appropriate delegate 
-			requestHelper.getMethod(request,response);
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String path = request.getRequestURI().substring(request.getContextPath().length());
+        System.out.println("GET/" + path);
+        if (path.startsWith("/static/")) {
+            super.doGet(request, response);
+        } else {
+            // route GET request to appropriate delegate
+            requestHelper.getMethod(request, response);
 
-		}
-	}
+        }
+    }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
+        String path = request.getRequestURI().substring(request.getContextPath().length());
+        System.out.println("POST/" + path);  
+        
+        requestHelper.getPost(request, response);
+        // super.doPost(request, response);
+    }
+
+    
 
 }

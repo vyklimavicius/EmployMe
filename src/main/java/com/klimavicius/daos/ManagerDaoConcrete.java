@@ -110,6 +110,7 @@ public class ManagerDaoConcrete implements ManagerDao {
 			e.printStackTrace();
 		}
 
+		System.out.println("New Manager created!");
 		return 0;
 
 	}

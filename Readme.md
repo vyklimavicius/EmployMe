@@ -5,7 +5,7 @@ Project 1 will an individual project be based off of an employee expense reimbur
 -An Employee can login 
 -An Employee can view the Employee Homepage 
 -An Employee can logout 
--An Employee can submit a reimbursement requestf xx 
+-An Employee can submit a reimbursement request
 -An Employee can view their pending reimbursement requests
 -An Employee can view their resolved reimbursement requests 
 -An Employee can view their information (profile) 

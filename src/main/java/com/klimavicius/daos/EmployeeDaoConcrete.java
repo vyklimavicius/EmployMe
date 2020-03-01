@@ -95,9 +95,8 @@ public class EmployeeDaoConcrete implements EmployeeDao{
 
 	@Override
 	public int createEmployee(Employee e) {
-		
 		String sql = "insert into employees (firstname, lastname, email, password) values (?, ?, ?, ?)";
-
+		
 		try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
 			ps.setString(1, e.getFirstName());
 			ps.setString(2, e.getLastName());
@@ -107,7 +106,8 @@ public class EmployeeDaoConcrete implements EmployeeDao{
 		} catch (SQLException x) {
 			x.printStackTrace();
 		}
-
+		
+		System.out.println("New Employee created!");
 		return 0;
 	}
 

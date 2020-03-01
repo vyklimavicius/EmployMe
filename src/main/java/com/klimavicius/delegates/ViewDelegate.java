@@ -13,15 +13,17 @@ public class ViewDelegate {
             throws ServletException, IOException {
 
         String uri = req.getServletPath();
-        System.out.println("in our view delegate: " + uri);
+        System.out.println("view delegate: " + uri);
 
         switch (uri) {
-            case "/test":
-                req.getRequestDispatcher("/static/views/index.html").forward(req, resp);
+            case "/signup":
+                req.getRequestDispatcher("/static/views/SignUp.html").forward(req, resp);
                 break;
-            case "/directory":
-                req.getRequestDispatcher("/static/Views/BirdDirectory.html").forward(req, resp);
+            case "/login":
+                req.getRequestDispatcher("/static/views/Login.html").forward(req, resp);
                 break;
+            case "/default":
+                req.getRequestDispatcher("/static/views/Dashboard").forward(req, resp);
             default:
                 resp.sendError(404, "Static Resource Not Found");
         }

@@ -13,13 +13,17 @@ public class Manager {
 				+ email + ", password=" + password + "]";
 	}
 
+	// default constructor
+	public Manager(){
+		super();
+	}
+	
 	public Manager(int managerId, String firstName, String lastName, String email, String password) {
-		String encryptedHash = BCrypt.hashpw(password, BCrypt.gensalt());
 		this.managerId = managerId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.password = encryptedHash;
+		this.password = password;
 	}
 
 	public Manager(String firstName, String lastName, String email, String password) {

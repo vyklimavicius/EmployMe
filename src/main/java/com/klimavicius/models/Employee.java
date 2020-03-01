@@ -4,8 +4,8 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class Employee {
 	
-	int employeeId;
-	String firstName, lastName, email, password;
+	private int employeeId;
+	private String firstName, lastName, email, password;
 	
 	
 	@Override
@@ -14,14 +14,17 @@ public class Employee {
 				+ email + ", password=" + password + "]";
 	}
 
+	//default constructor
+	public Employee(){
+		super();
+	}
 
 	public Employee(int employeeId, String firstName, String lastName, String email, String password) {
-		String encryptedHash = BCrypt.hashpw(password, BCrypt.gensalt());
 		this.employeeId = employeeId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		this.password = encryptedHash;
+		this.password = password;
 	}
 
 	public Employee(String firstName, String lastName, String email, String password) {

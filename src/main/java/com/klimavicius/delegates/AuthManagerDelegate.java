@@ -20,7 +20,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class AuthManagerDelegate {
 
-    private ManagerDaoConcrete managerController = new ManagerDaoConcrete();
+    // private ManagerDaoConcrete managerController = new ManagerDaoConcrete();
     
     public void authentication(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -59,13 +59,12 @@ public class AuthManagerDelegate {
         Auth authUser = objectMapper.readValue(body, Auth.class);
         String passPassword = authUser.getPassword();
         Manager currentManager = managerService.getManagerByEmail(authUser.getEmail());
-        System.out.println(currentManager);
+        // System.out.println(currentManager);
         String userPassword = currentManager.getPassword();
         if (BCrypt.checkpw(passPassword, userPassword)){
             System.out.println("Passwords matches!");
-            String returnToken = objectMapper.writeValueAsString(currentManager);
             try (PrintWriter pw = resp.getWriter()) {
-                pw.write(new ObjectMapper().writeValueAsString(returnToken));
+                pw.write(new ObjectMapper().writeValueAsString(currentManager));
             }
             resp.setStatus(200);
         } else {

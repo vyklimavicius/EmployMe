@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.klimavicius.delegates.AuthEmployeeDelegate;
 import com.klimavicius.delegates.AuthManagerDelegate;
 import com.klimavicius.delegates.EmployeeDelegate;
 import com.klimavicius.delegates.ManagerDelegate;
@@ -20,6 +21,7 @@ public class RequestHelper {
     private ReimbursementDelegate reimbursementDelegate = new ReimbursementDelegate();
 	private ViewDelegate viewDelegate = new ViewDelegate();
 	private AuthManagerDelegate authManagerDelegate = new AuthManagerDelegate();
+	private AuthEmployeeDelegate authEmployeeDelegate = new AuthEmployeeDelegate();
 
     public void getMethod(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String path = req.getRequestURI().substring(req.getContextPath().length());
@@ -67,8 +69,11 @@ public class RequestHelper {
 				case "authmanager":
 					authManagerDelegate.authentication(req, resp);
 					break;
+				case "authemployee":
+					authEmployeeDelegate.authentication(req, resp);
+					break;
 				case "reimbursements":
-					reimbursementDelegate.getAllReimbursements(req, resp);
+					reimbursementDelegate.createReimbursement(req, resp);
 					break;
 				default:
 					resp.sendError(404, "Working on it");

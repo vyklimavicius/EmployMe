@@ -1,6 +1,6 @@
 package com.klimavicius.models;
 
-import org.mindrot.jbcrypt.BCrypt;
+
 
 public class Auth {
 
@@ -23,6 +23,7 @@ public class Auth {
         return "Auth [email=" + email + ", password=" + password + "]";
     }
 
+    
     public String getEmail() {
         return email;
     }

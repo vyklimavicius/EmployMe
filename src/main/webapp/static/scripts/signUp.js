@@ -20,16 +20,22 @@ const onSubmit = (e) => {
     user ? user = "manager" : user = "employee";
     if (user == "manager"){
         sendMethod(urlManagers, body)
+        document.querySelector('#sign-up-form').reset();
+        setTimeout(() => {
+            window.location.href = "http://localhost:8080/EmployMe-0.0/login";
+        }, 2000)
     } else {
         sendMethod(urlEmployees, body)
+        document.querySelector('#sign-up-form').reset();
+        setTimeout( () => {
+            window.location.href = "http://localhost:8080/EmployMe-0.0/login";
+        }, 2000)
     }
 }
 
 const sendMethod = (url, body) => {
     
     let request = new XMLHttpRequest();
-    request.open("POST", url);
-    request.setRequestHeader('content-type', 'application/json');
     
     request.onreadystatechange = function () {
         if (request.status == 201) {
@@ -39,5 +45,7 @@ const sendMethod = (url, body) => {
             console.error("Form was not submitted succesfully...");
         }
     }
+    request.open("POST", url);
+    request.setRequestHeader('content-type', 'application/json');
     request.send(JSON.stringify(body));
 }

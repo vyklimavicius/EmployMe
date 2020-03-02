@@ -18,6 +18,18 @@ public class Reimbursement {
 				+ status + ", reimbursement=" + reimbursement + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 
+	// default constructor
+	public Reimbursement(){
+		super();
+	}
+
+	public Reimbursement(int employeeId, Double reimbursement) {
+		this.employeeId = employeeId;
+		this.status = "pending";
+		this.managerId = 1;
+		this.reimbursement = reimbursement;
+	}
+
 	public Reimbursement(int reimbursementId, int employeeId, int managerId, String status, Double reimbursement, Date createdAt, Date updatedAt) {
 		this.reimbursementId = reimbursementId;
 		this.employeeId = employeeId;
@@ -35,12 +47,6 @@ public class Reimbursement {
 		this.reimbursement = reimbursement;
 	}
 
-	public Reimbursement(int employeeId, Double reimbursement) {
-		this.employeeId = employeeId;
-		this.status = "pending";
-		this.managerId = 1;
-		this.reimbursement = reimbursement;
-	}
 
 	public int getEmployeeId() {
 		return employeeId;

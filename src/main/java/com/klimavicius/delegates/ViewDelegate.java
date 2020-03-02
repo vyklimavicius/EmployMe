@@ -22,8 +22,8 @@ public class ViewDelegate {
             case "/login":
                 req.getRequestDispatcher("/static/views/Login.html").forward(req, resp);
                 break;
-            case "/default":
-                req.getRequestDispatcher("/static/views/Dashboard").forward(req, resp);
+            case "/dashboardemployee":
+                req.getRequestDispatcher("/static/views/DashBoardEmployee.html").forward(req, resp);
             default:
                 resp.sendError(404, "Static Resource Not Found");
         }

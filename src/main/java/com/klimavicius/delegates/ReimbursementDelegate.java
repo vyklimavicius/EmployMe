@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.klimavicius.models.Reimbursement;
-import com.klimavicius.services.ManagerService;
 import com.klimavicius.services.ReimbursementService;
 
 public class ReimbursementDelegate {
@@ -69,5 +68,51 @@ public class ReimbursementDelegate {
         System.out.println(newReimbursement);
         reimbursementService.createReimbursement(newReimbursement);
         resp.setStatus(201);
+    }
+
+    public void updateReimbursement(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        System.out.println("I'm in update reimbursement!");
+        String body = null;
+        StringBuilder stringBuilder = new StringBuilder();
+        BufferedReader bufferedReader = null;
+        ReimbursementService reimbursementService = new ReimbursementService();
+
+        InputStream inputStream = req.getInputStream();
+
+        try {
+            if (inputStream != null) {
+                bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                char[] charBuffer = new char[128];
+                int bytesRead = -1;
+                while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+                    stringBuilder.append(charBuffer, 0, bytesRead);
+                }
+            } else {
+                stringBuilder.append("");
+            }
+        } catch (IOException ex) {
+            throw ex;
+        } finally {
+            if (bufferedReader != null) {
+                try {
+                    bufferedReader.close();
+                } catch (IOException ex) {
+                    throw ex;
+                }
+            }
+        }
+
+        body = stringBuilder.toString();
+        Reimbursement newReimbursement = objectMapper.readValue(body, Reimbursement.class);
+        int managerId = newReimbursement.getManagerId();
+        String status = newReimbursement.getStatus();
+        Reimbursement updateReimbursement = reimbursementService.getReimbursementById(newReimbursement.getReimbursementId());
+        updateReimbursement.setManagerId(managerId);
+        updateReimbursement.setStatus(status);
+        System.out.println(updateReimbursement);
+        reimbursementService.updateReimbursement(updateReimbursement);
+        resp.setStatus(200);
     }
 }

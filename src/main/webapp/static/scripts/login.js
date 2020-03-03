@@ -64,8 +64,6 @@ const setSession = (response, user) => {
         localStorage.setItem("session", JSON.stringify(session));
     }
 
-    // let local = JSON.parse(localStorage.getItem("session"));
-    // console.log(local);
     if (user == "manager") {
         window.location.href = "http://localhost:8080/EmployMe-0.0/dashboardmanager";
     } else {

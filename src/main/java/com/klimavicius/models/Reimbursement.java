@@ -26,7 +26,7 @@ public class Reimbursement {
 
 	public Reimbursement(int employeeId, Double reimbursement) {
 		this.employeeId = employeeId;
-		this.status = "pending";
+		this.status = "Pending";
 		this.managerId = 1;
 		this.reimbursement = reimbursement;
 	}
@@ -41,11 +41,10 @@ public class Reimbursement {
 		this.updatedAt = updatedAt;
 	}
 
-	public Reimbursement(int employeeId, int managerId, String status, Double reimbursement) {
-		this.employeeId = employeeId;
+	public Reimbursement(int reimbursementId, int managerId, String status) {
+		this.reimbursementId = reimbursementId;
 		this.managerId = managerId;
 		this.status = status;
-		this.reimbursement = reimbursement;
 	}
 
 

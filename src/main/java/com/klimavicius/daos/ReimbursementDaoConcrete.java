@@ -131,67 +131,111 @@ public class ReimbursementDaoConcrete implements ReimbursementDao {
 
 	}
 
-	@Override
-	public int updateReimbursementStatus(Reimbursement r, String status) {
+	// @Override
+	// public int updateReimbursementStatus(Reimbursement r, String status) {
 		
-		int employee_id = r.getEmployeeId();
-		ResultSet rs = null;
-		String sql = null;
+	// 	int employee_id = r.getEmployeeId();
+	// 	ResultSet rs = null;
+	// 	String sql = null;
 
-		switch(status){
-			case "pending":
-			sql = "update reimbursements set status = ? where employee_id = ?";
-					try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
-						ps.setString(1, "pending");
-						ps.setInt(2, employee_id);
-						ps.executeUpdate();
-					} catch (SQLException x) {
-						x.printStackTrace();
-					}
-			break;
-			case "resolved":
-				sql = "update reimbursements set status = ? where employee_id = ?";
-				try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
-					ps.setString(1, "resolved");
-					ps.setInt(2, employee_id);
-					ps.executeUpdate();
-				} catch (SQLException x) {
-					x.printStackTrace();
-				}
-				break;
-			case "denied":
-				sql = "update reimbursements set status = ? where employee_id = ?";
-				try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
-					ps.setString(1, "denied");
-					ps.setInt(2, employee_id);
-					ps.executeUpdate();
-				} catch (SQLException x) {
-					x.printStackTrace();
-				}
-				break;
-			default:
-				break;
-		}
+	// 	switch(status){
+	// 		case "pending":
+	// 		sql = "update reimbursements set status = ? where employee_id = ?";
+	// 				try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+	// 					ps.setString(1, "pending");
+	// 					ps.setInt(2, employee_id);
+	// 					ps.executeUpdate();
+	// 				} catch (SQLException x) {
+	// 					x.printStackTrace();
+	// 				}
+	// 		break;
+	// 		case "resolved":
+	// 			sql = "update reimbursements set status = ? where employee_id = ?";
+	// 			try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+	// 				ps.setString(1, "resolved");
+	// 				ps.setInt(2, employee_id);
+	// 				ps.executeUpdate();
+	// 			} catch (SQLException x) {
+	// 				x.printStackTrace();
+	// 			}
+	// 			break;
+	// 		case "denied":
+	// 			sql = "update reimbursements set status = ? where employee_id = ?";
+	// 			try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+	// 				ps.setString(1, "denied");
+	// 				ps.setInt(2, employee_id);
+	// 				ps.executeUpdate();
+	// 			} catch (SQLException x) {
+	// 				x.printStackTrace();
+	// 			}
+	// 			break;
+	// 		default:
+	// 			break;
+	// 	}
 				
-		return 0;
-	}
+	// 	return 0;
+	// }
 
 	@Override
-	public int updateReimbursementManager(Reimbursement r, Manager m) {
+	public int updateReimbursement(Reimbursement r) {
 		
-		int employee_id = r.getEmployeeId();
-		int manager_id = m.getManagerId();
-		String sql = "update reimbursements set manager_id = ? where employee_id = ?";
+		int reimbursement_id = r.getReimbursementId();
+		int manager_id = r.getManagerId();
+		String status = r.getStatus();
+		String sql = "update reimbursements set manager_id = ?, status = ?  where reimbursement_id = ?";
+
+		// try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+		// 	ps.setInt(1, manager_id);
+		// 	ps.setInt(2, employee_id);
+		// 	ps.executeUpdate();
+		// } catch (SQLException x) {
+		// 	x.printStackTrace();
+		// }
 
 		try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
 			ps.setInt(1, manager_id);
-			ps.setInt(2, employee_id);
-			ps.executeUpdate();
+			ps.setString(2, status);
+			ps.setInt(3, reimbursement_id);
+			ResultSet rs = ps.executeQuery();
 		} catch (SQLException x) {
 			x.printStackTrace();
 		}
 
+		System.out.println("Reimbursement updated!");
 		return 0;
+	}
+
+	@Override
+	public Reimbursement getReimbursementById(int id) {
+		
+		String sql = "select * from reimbursements where reimbursement_id = ?";
+		Reimbursement selectedReimbursement = null;
+
+		try (Connection c = ConnectionUtil.getConnection();
+				PreparedStatement ps = c.prepareStatement(sql);
+				) {
+					ps.setInt(1, id);
+					ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				int reimbursement_id = rs.getInt("reimbursement_id");
+				int employee_id = rs.getInt("employee_id");
+				int manager_id = rs.getInt("manager_id");
+				String status = rs.getString("status");
+				Double reimbursement = rs.getDouble("reimbursement");
+				Date createdAt = new Date(rs.getTimestamp("created_at").getTime());
+				Date updatedAt = new Date(rs.getTimestamp("updated_at").getTime());
+
+				selectedReimbursement = new Reimbursement(reimbursement_id, employee_id, manager_id,
+						status, reimbursement, createdAt, updatedAt);
+
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return selectedReimbursement;
 	}
 
 }

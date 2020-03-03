@@ -17,6 +17,11 @@ public class ReimbursementService extends HttpServlet {
         return reimbursementController.getReimbursements();
     }
 
+    public Reimbursement getReimbursementById(int id){
+        return reimbursementController.getReimbursementById(id);
+    }
+
+
     public List<Reimbursement> getReimbursementEmployeeById(int id){
         return reimbursementController.getReimbursementEmployeeById(id);
     }
@@ -29,11 +34,11 @@ public class ReimbursementService extends HttpServlet {
         return reimbursementController.createReimbursement(r);
     }
 
-    public int updateReimbursementStatus(Reimbursement r, String status){
-        return reimbursementController.updateReimbursementStatus(r, status);
+    public int updateReimbursement(Reimbursement r){
+        return reimbursementController.updateReimbursement(r);
     }
 
-    public int updateReimbursementManager(Reimbursement r, Manager m){
-        return reimbursementController.updateReimbursementManager(r, m);
-    }
+    // public int updateReimbursementManager(Reimbursement r, Manager m){
+    //     return reimbursementController.updateReimbursementManager(r, m);
+    // }
 }

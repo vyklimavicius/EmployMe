@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.klimavicius.daos.EmployeeDaoConcrete;
 import com.klimavicius.models.Auth;
 import com.klimavicius.models.Employee;
 import com.klimavicius.services.EmployeeService;
@@ -20,7 +19,6 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class AuthEmployeeDelegate {
 
-    // private EmployeeDaoConcrete employeeController = new EmployeeDaoConcrete();
 
     public void authentication(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

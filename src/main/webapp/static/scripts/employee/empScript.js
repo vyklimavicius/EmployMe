@@ -2,50 +2,20 @@ console.log('%c Welcome to V\'s console', 'background: #cc9900; color: white; di
 const currentUser = JSON.parse(localStorage.getItem("session"));
 const url = "http://localhost:8080/EmployMe-0.0/api/reimbursements";
 let reimbursements;
-// let reimbursements = [
-//   {
-//     reimbursementId: 1,
-//     employeeId: 1,
-//     managerId: 1,
-//     status: "pending",
-//     reimbursement: 2000,
-//     createdAt: 1582524000000,
-//     updatedAt: 1582524000000
-//   },
-//   {
-//     reimbursementId: 2,
-//     employeeId: 2,
-//     managerId: 1,
-//     status: "pending",
-//     reimbursement: 2000,
-//     createdAt: 1582524000000,
-//     updatedAt: 1582524000000
-//   },
-//   {
-//     reimbursementId: 3,
-//     employeeId: 3,
-//     managerId: 1,
-//     status: "pending",
-//     reimbursement: 2000,
-//     createdAt: 1582524000000,
-//     updatedAt: 1582524000000
-//   },
-//   {
-//     reimbursementId: 4,
-//     employeeId: 4,
-//     managerId: 1,
-//     status: "pending",
-//     reimbursement: 2000,
-//     createdAt: 1582524000000,
-//     updatedAt: 1582524000000
-//   }];
 
-// const currentUser = { 
-//     id: 1,
-//     firstname: "Vytautas",
-//     lastname: "Klimavicius",
-//     email: "vyklimavicius@gmail.com",
-// }
+// Check token
+
+window.onload = () => {
+if (localStorage.getItem("session") === null){
+    window.location.href = "http://localhost:8080/EmployMe-0.0/login";
+}
+
+let name = document.querySelector('#user-name');
+name.innerText = "Hello, " + currentUser.firstname + "!";
+console.log('%c Load success!', 'background: green; color: white; display: block;');
+};
+
+// Data fetching 
 
 const getMethod = (url, callback) => {
 
@@ -67,39 +37,9 @@ const setReimbursements = (response) => {
     reimbursements = JSON.parse(response);
 };
 
-// getMethod(url, setReimbursements);
-
-
-// window.onload = () => {
-//    if (localStorage.getItem("session") === null){
-//         window.location.href = "http://localhost:8080/EmployMe-0.0/login";
-//    }
-//    let currentUser = JSON.parse(localStorage.getItem("session"));
-//    let name = document.querySelector('#user-name');
-//    name.innerText = "Hello, " + currentUser.firstname + "!";
-//    console.log('%c Load success!', 'background: green; color: white; display: block;');
-// }
-
-window.onload = () => {
-if (localStorage.getItem("session") === null){
-    window.location.href = "http://localhost:8080/EmployMe-0.0/login";
-}
-//    let currentUser = {
-//        firstname: "Vytautas",
-//        lastname: "Klimavicius",
-//        email: "vyklimavicius@gmail.com",
-//    };
-   let name = document.querySelector('#user-name');
-   name.innerText = "Hello, " + currentUser.firstname + "!";
-   console.log('%c Load success!', 'background: green; color: white; display: block;');
-};
+// Handler functions
 
 const showProfile = () => {
-    // let currentUser = {
-    //     firstname: "Vytautas",
-    //     lastname: "Klimavicius",
-    //     email: "vyklimavicius@gmail.com",
-    // }
     let mainCard = document.querySelector('#main-card');
     mainCard.innerHTML = "";
     mainCard.innerHTML = `<div class="card" style="height: 80vh; border: 1px solid #cc9900; box-shadow: 5px 10px antiquewhite;">
@@ -115,7 +55,6 @@ const showProfile = () => {
                 <h6 class="card-subtitle mb-2 text-muted" style="text-align: center;">Employee</h6>
                 <div style="margin-top: 7vh; text-align: center;">
                     <button onclick="showUpdateForm()" type="button" class="btn btn-warning" style="color: #cc9900; font-size: 2vw; background-color: antiquewhite; border-color: antiquewhite;">Update</button>
-                    <button onclick="showProfile()" type="button" class="btn btn-warning" style="color: #cc9900; font-size: 2vw; background-color: antiquewhite; border-color: antiquewhite;">Delete</button>
                 </div>
             </div>
         </div>`;
@@ -132,7 +71,7 @@ const addReimbursement = () => {
                 <label class="card-title" style="margin-top: 6vh; width: 20vw; height: 2vh; font-size: 2vw; color:#cc9900;" for="reimbursement">Please type Amount $:</label>
                 <br>
                 <input style="margin-top: 3vh; width: 20vw; height: 4vh; font-size: 1vw; border-color: antiquewhite;" class="form-control-sm"
-                    id="reimbursement" type="number" name="reimbursement" step="0.01" placeholder="two decimal places expected" required>
+                    id="reimbursement" type="number" min="0" name="reimbursement" step="0.01" placeholder="two decimal places expected" required>
             </div>
             <div class="form-group" style="text-align: center;">
                 <input
@@ -162,9 +101,9 @@ const viewReimbursements = () => {
                 <table class="table table-striped table-bordered table-sm" style="border: 2px solid #cc9900; box-shadow: 5px 10px antiquewhite;">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">reimbursement</th>
-                            <th scope="col">status</th>
+                            <th style="color: #cc9900;" scope="col">#</th>
+                            <th style="color: #cc9900;" scope="col">reimbursement</th>
+                            <th style="color: #cc9900;" scope="col">status</th>
                         </tr>
                     </thead>
                     <tbody id="reimbursement-table">
@@ -198,7 +137,7 @@ const onSubmit = (e) => {
     let body = {
         employeeId: currentUser.id,
         reimbursement: reimbursement,
-        status: "pending",
+        status: "Pending",
         managerId: 1
     }
     document.querySelector('#reimbursement-form').reset();

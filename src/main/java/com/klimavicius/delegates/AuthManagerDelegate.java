@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.klimavicius.daos.ManagerDaoConcrete;
 import com.klimavicius.models.Auth;
 import com.klimavicius.models.Manager;
 import com.klimavicius.services.ManagerService;
@@ -20,7 +19,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class AuthManagerDelegate {
 
-    // private ManagerDaoConcrete managerController = new ManagerDaoConcrete();
+    
     
     public void authentication(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -59,19 +58,22 @@ public class AuthManagerDelegate {
         Auth authUser = objectMapper.readValue(body, Auth.class);
         String passPassword = authUser.getPassword();
         Manager currentManager = managerService.getManagerByEmail(authUser.getEmail());
-        // System.out.println(currentManager);
-        String userPassword = currentManager.getPassword();
-        if (BCrypt.checkpw(passPassword, userPassword)){
-            System.out.println("Passwords matches!");
-            try (PrintWriter pw = resp.getWriter()) {
-                pw.write(new ObjectMapper().writeValueAsString(currentManager));
-            }
-            resp.setStatus(200);
+        if (currentManager == null) {
+            System.out.println("resource not found");
+            resp.setStatus(404);
         } else {
-            System.out.println("Passwords don't match!");
-            resp.setStatus(401);
+            String userPassword = currentManager.getPassword();
+            if (BCrypt.checkpw(passPassword, userPassword)){
+                System.out.println("Passwords matches!");
+                try (PrintWriter pw = resp.getWriter()) {
+                    pw.write(new ObjectMapper().writeValueAsString(currentManager));
+                }
+                resp.setStatus(200);
+            } else {
+                System.out.println("Passwords don't match!");
+                resp.setStatus(401);
+            }
         }
-
     }
 
 }

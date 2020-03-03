@@ -14,11 +14,11 @@ Project 1 will an individual project be based off of an employee expense reimbur
 -A Manager can login Done
 -A Manager can view the Manager Homepage Done
 -A Manager can logout Done
--A Manager can approve/deny pending reimbursement requests 
--A Manager can view all pending requests from all employees 
--A Manager can view all resolved requests from all employees and see which manager resolved it 
+-A Manager can approve/deny pending reimbursement requests Done
+-A Manager can view all pending requests from all employees Done
+-A Manager can view all resolved requests from all employees and see which manager resolved it Done
 -A Manager can view all Employees Done
--A Manager can view reimbursement requests from a single Employee   
+-A Manager can view reimbursement requests from a single Employee Done
  
  
 Additional Requirements: 

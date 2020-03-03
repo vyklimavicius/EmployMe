@@ -94,6 +94,9 @@ public class RequestHelper {
 				case "employees":
 				employeeDelegate.updateEmployee(req, resp);
 				break;
+				case "reimbursements":
+				reimbursementDelegate.updateReimbursement(req, resp);
+				break;
 				default:
 				resp.sendError(404, "Working on it");
 			}

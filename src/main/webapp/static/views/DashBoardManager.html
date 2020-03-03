@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,34 +21,48 @@
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
         rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
-    <title>Dashboard Employee</title>
+    <title>Dashboard Manager</title>
 </head>
+
 <body>
-    <nav style="position: fixed; width: 12vw; height: 100vh; border: 1px solid #cc9900; background-color: antiquewhite;">
+    <nav
+        style="position: fixed; width: 12vw; height: 100vh; border: 1px solid #cc9900; background-color: antiquewhite;">
         <h1 style="text-align: center; font-family: 'Lobster'; color: #cc9900; font-size: 2vw;">EmployMe</h1>
-        <img class="img-fluid" src="http://localhost:8080/EmployMe-0.0/static/assets/avatar.jpg" alt="avatar" style="border-radius: 50%; border: 1px solid #cc9900; margin-top: 2vh; margin-left: 3vw; width: 5vw; height: 10vh;">
+        <img class="img-fluid" src="http://localhost:8080/EmployMe-0.0/static/assets/manager.png" alt="avatar"
+            style="border-radius: 50%; border: 1px solid #cc9900; margin-top: 2vh; margin-left: 3vw; width: 5vw; height: 10vh;">
         <h3 id="user-name" style="margin-top: 2vh; text-align: center; font-size: 1.5vw; color:#cc9900"">%name%</h3>
-        <div style="text-align: center; margin-top: 2vh; border: 1px solid #cc9900">
+        <h3 style="margin-top: 2vh; text-align: center; font-size: 1.5vw; color:#cc9900"">Manager</h3>
+        <div style=" text-align: center; margin-top: 2vh; border: 1px solid #cc9900">
             <a class="navbar-brand" href="#" onclick="showProfile()" style="font-size: 1.5vw; color:#cc9900">Profile</a>
-        </div>
-        <div  style="text-align: center; border: 1px solid #cc9900">
-            <a class="navbar-brand" href="#" onclick="addReimbursement()" style="font-size: 1.5vw; color:#cc9900">Add request</a>
-        </div>
-        <div  style="text-align: center; border: 1px solid #cc9900">
-            <a class="navbar-brand" href="#" onclick="viewReimbursements()" style="font-size: 1.5vw; color:#cc9900">View status</a>
-        </div>
-        <div style="text-align: center; border: 1px solid #cc9900">
-            <a class="navbar-brand" href="#" onclick="logOut()" style="font-size: 1.5vw; color:#cc9900">Logout</a>
-        </div>
+            </div>
+            <div style="text-align: center; border: 1px solid #cc9900">
+                <a class="navbar-brand" href="#" onclick="addReimbursement()"
+                    style="font-size: 1.5vw; color:#cc9900">Resolved</a>
+            </div>
+            <div style="text-align: center; border: 1px solid #cc9900">
+                <a class="navbar-brand" href="#" onclick="viewReimbursements()"
+                    style="font-size: 1.5vw; color:#cc9900">Pending</a>
+            </div>
+            <div style="text-align: center; border: 1px solid #cc9900">
+                <a class="navbar-brand" href="#" onclick="viewEmployees()"
+                    style="font-size: 1.5vw; color:#cc9900">Employees</a>
+            </div>
+            <div style="text-align: center; border: 1px solid #cc9900">
+                <a class="navbar-brand" href="#" onclick="showfilterReimbursements()"
+                    style="font-size: 1.5vw; color:#cc9900">Filter</a>
+            </div>
+            <div style="text-align: center; border: 1px solid #cc9900">
+                <a class="navbar-brand" href="#" onclick="logOut()" style="font-size: 1.5vw; color:#cc9900">Logout</a>
+            </div>
     </nav>
     <section id="main-card" style="position: absolute; top: 10vh; height: 40vh; width: 70vw; bottom: 50vh; left: 21vw;">
         <div style="margin-top: 30vh; margin-left: 32vw;" class="spinner-border text-warning" role="status">
             <span class="sr-only">Loading...</span>
         </div>
     </section>
-    <script src="http://localhost:8080/EmployMe-0.0/static/scripts/employee/empScript.js"></script>
+    <script src="http://localhost:8080/EmployMe-0.0/static/scripts/manager/manScript.js"></script>
 </body>
 </html>
 
-<!-- http://localhost:8080/EmployMe-0.0/static/scripts/empScript.js -->
-<!-- ../scripts/empScript.js -->
+<!-- ../scripts/manager/manScript.js -->
+<!-- http://localhost:8080/EmployMe-0.0/static/scripts/manager/manScript.js -->

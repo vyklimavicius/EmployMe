@@ -29,8 +29,8 @@ public class EmployeeService extends HttpServlet {
         return employeeController.createEmployee(e);
     }
 
-    public int updateEmployee(String value, Employee e){
-        return employeeController.updateEmployee(value, e);
+    public int updateEmployee(Employee e){
+        return employeeController.updateEmployee(e);
     }
 
     public int deleteEmployee(Employee e){

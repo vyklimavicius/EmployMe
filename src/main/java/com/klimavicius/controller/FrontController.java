@@ -14,11 +14,11 @@ public class FrontController extends DefaultServlet {
 
     private RequestHelper requestHelper = new RequestHelper();
 
-    
     public FrontController() {
         super();
     }
 
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String path = request.getRequestURI().substring(request.getContextPath().length());
@@ -36,10 +36,19 @@ public class FrontController extends DefaultServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException {
         String path = request.getRequestURI().substring(request.getContextPath().length());
-        System.out.println("POST/" + path);  
-        
+        System.out.println("POST/" + path);
+
         requestHelper.getPost(request, response);
         // super.doPost(request, response);
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String path = request.getRequestURI().substring(request.getContextPath().length());
+        System.out.println("PUT/" + path);
+
+        requestHelper.putMethod(request, response);
+        // super.doPut(req, resp);
     }
 
     

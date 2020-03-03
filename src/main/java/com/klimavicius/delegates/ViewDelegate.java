@@ -24,6 +24,10 @@ public class ViewDelegate {
                 break;
             case "/dashboardemployee":
                 req.getRequestDispatcher("/static/views/DashBoardEmployee.html").forward(req, resp);
+                break;
+            case "/dashboardmanager":
+                req.getRequestDispatcher("/static/views/DashBoardManager.html").forward(req, resp);
+                break;
             default:
                 resp.sendError(404, "Static Resource Not Found");
         }

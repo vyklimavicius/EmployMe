@@ -10,7 +10,7 @@ public interface EmployeeDao {
 	public Employee getEmployeeByEmail(String s);
 	public Employee getEmployeeById(int id);
 	public int createEmployee(Employee e);
-	public int updateEmployee(String value, Employee e);
+	public int updateEmployee(Employee e);
 	public int deleteEmployee(Employee e);
 
 }

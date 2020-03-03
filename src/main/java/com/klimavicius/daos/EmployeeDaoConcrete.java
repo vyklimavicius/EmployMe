@@ -112,55 +112,66 @@ public class EmployeeDaoConcrete implements EmployeeDao{
 	}
 
 	@Override
-	public int updateEmployee(String value, Employee e) {
+	public int updateEmployee(Employee e) {
 		
 		int employee_id = e.getEmployeeId();
-		ResultSet rs = null;
-		String sql = null;
-		switch (value) {
-			case "firstname":
-				sql = "update employees set firstname = ? where employee_id = ?";
-				try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
-					ps.setString(1, e.getFirstName());
-					ps.setInt(2, employee_id);
-					ps.executeUpdate();
-				} catch (SQLException x) {
-					x.printStackTrace();
-				}
-				break;
-			case "lastname":
-				sql = "update employees set lastname = ? where employee_id = ?";
-				try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
-					ps.setString(1, e.getLastName());
-					ps.setInt(2, employee_id);
-					ps.executeUpdate();
-				} catch (SQLException x) {
-					x.printStackTrace();
-				}
-				break;
-			case "email":
-				sql = "update employees set email = ? where employee_id = ?";
-				try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
-					ps.setString(1, e.getEmail());
-					ps.setInt(2, employee_id);
-					ps.executeUpdate();
-				} catch (SQLException x) {
-					x.printStackTrace();
-				}
-				break;
-			case "password":
-				sql = "update employees set password = ? where employee_id = ?";
-				try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
-					ps.setString(1, e.getPassword());
-					ps.setInt(2, employee_id);
-					ps.executeUpdate();
-				} catch (SQLException x) {
-					x.printStackTrace();
-				}
-				break;
-			default:
-				break;
+		String sql = "update employees set firstname = ?, lastname = ?, password = ? where employee_id = ?";
+
+		try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+			ps.setString(1, e.getFirstName());
+			ps.setString(2, e.getLastName());
+			ps.setString(3, e.getPassword());
+			ps.setInt(4, employee_id);
+			ResultSet rs = ps.executeQuery();
+		} catch (SQLException x) {
+			x.printStackTrace();
 		}
+
+		System.out.println("Employee updated!");
+		// switch (value) {
+		// 	case "firstname":
+		// 		sql = "update employees set firstname = ? where employee_id = ?";
+		// 		try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+		// 			ps.setString(1, e.getFirstName());
+		// 			ps.setInt(2, employee_id);
+		// 			ps.executeUpdate();
+		// 		} catch (SQLException x) {
+		// 			x.printStackTrace();
+		// 		}
+		// 		break;
+		// 	case "lastname":
+		// 		sql = "update employees set lastname = ? where employee_id = ?";
+		// 		try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+		// 			ps.setString(1, e.getLastName());
+		// 			ps.setInt(2, employee_id);
+		// 			ps.executeUpdate();
+		// 		} catch (SQLException x) {
+		// 			x.printStackTrace();
+		// 		}
+		// 		break;
+		// 	case "email":
+		// 		sql = "update employees set email = ? where employee_id = ?";
+		// 		try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+		// 			ps.setString(1, e.getEmail());
+		// 			ps.setInt(2, employee_id);
+		// 			ps.executeUpdate();
+		// 		} catch (SQLException x) {
+		// 			x.printStackTrace();
+		// 		}
+		// 		break;
+		// 	case "password":
+		// 		sql = "update employees set password = ? where employee_id = ?";
+		// 		try (Connection c = ConnectionUtil.getConnection(); PreparedStatement ps = c.prepareStatement(sql)) {
+		// 			ps.setString(1, e.getPassword());
+		// 			ps.setInt(2, employee_id);
+		// 			ps.executeUpdate();
+		// 		} catch (SQLException x) {
+		// 			x.printStackTrace();
+		// 		}
+		// 		break;
+		// 	default:
+		// 		break;
+		// }
 		return 0;
 	}
 

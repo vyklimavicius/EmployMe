@@ -83,6 +83,25 @@ public class RequestHelper {
 			viewDelegate.resolveView(req, resp);
 		}
 	}
+
+	public void putMethod(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		String path = req.getRequestURI().substring(req.getContextPath().length());
+
+		if (path.startsWith("/api/")) {
+
+			String url = path.substring(5);
+			switch(url){
+				case "employees":
+				employeeDelegate.updateEmployee(req, resp);
+				break;
+				default:
+				resp.sendError(404, "Working on it");
+			}
+
+		}
+
+
+	}
 	
 
 

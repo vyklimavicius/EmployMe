@@ -27,6 +27,7 @@ public class ReimbursementDelegate {
         try (PrintWriter pw = resp.getWriter()) {
             pw.write(new ObjectMapper().writeValueAsString(reimbursements));
         }
+        resp.setStatus(200);
     }
 
     public void createReimbursement(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

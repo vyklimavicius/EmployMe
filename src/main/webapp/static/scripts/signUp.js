@@ -7,8 +7,8 @@ const onSubmit = (e) => {
     e.preventDefault();
     let firstName, lastName, email, password;
     firstName = document.querySelector('#firstName').value;
-    lastName = document.querySelector('#lastName').value
-    email = document.querySelector('#email').value
+    lastName = document.querySelector("#lastName").value;
+    email = document.querySelector('#email').value.toLowerCase();
     password = document.querySelector('#password').value
     let body = {
         firstName: firstName,
@@ -41,7 +41,8 @@ const sendMethod = (url, body) => {
         if (request.status == 201) {
             console.log(request.responseText);
             console.info('%c Form was submitted succesfully!!', 'background: green; color: white; display: block;');
-        } else {
+        } else if (request.status == 422) {
+            alert("Email already Exists!");
             console.error("Form was not submitted succesfully...");
         }
     }

@@ -27,6 +27,13 @@ public class Employee {
 		this.password = password;
 	}
 
+	public Employee(int employeeId, String firstName, String lastName, String password) {
+		this.employeeId = employeeId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.password = password;
+	}
+
 	public Employee(String firstName, String lastName, String email, String password) {
 		String encryptedHash = BCrypt.hashpw(password, BCrypt.gensalt());
 		this.firstName = firstName;

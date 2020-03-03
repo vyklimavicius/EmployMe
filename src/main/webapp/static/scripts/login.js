@@ -7,7 +7,7 @@ const onSubmit = (e) => {
     let user = document.getElementById('toggle-user').checked;
     e.preventDefault();
     let email, password;
-    email = document.querySelector('#email').value
+    email = document.querySelector('#email').value.toLowerCase();
     password = document.querySelector('#password').value
     let body = {
         email: email,
@@ -30,8 +30,12 @@ const sendMethod = (url, body, callback, user) => {
         if (request.readyState == 4 && request.status == 200) {
             console.info('%c Form was submitted succesfully!!', 'background: green; color: white; display: block;'); 
             callback(request.response, user);
-        } else {
-            console.error("Processing...");
+        } else if(request.status == 401){
+            alert("password don't match!");
+            console.error("401...");
+        } else if (request.status == 404){
+            alert("That email doesn't exists!")
+            console.error("404...");
         }
     }
     
@@ -46,7 +50,7 @@ const setSession = (response, user) => {
         let session = {
             id: currentUser.managerId,
             firstname: currentUser.firstName,
-            lastName: currentUser.lastName,
+            lastname: currentUser.lastName,
             email: currentUser.email
         }
         localStorage.setItem("session", JSON.stringify(session));
@@ -54,7 +58,7 @@ const setSession = (response, user) => {
         let session = {
             id: currentUser.employeeId,
             firstname: currentUser.firstName,
-            lastName: currentUser.lastName,
+            lastname: currentUser.lastName,
             email: currentUser.email
         }
         localStorage.setItem("session", JSON.stringify(session));
@@ -63,7 +67,7 @@ const setSession = (response, user) => {
     // let local = JSON.parse(localStorage.getItem("session"));
     // console.log(local);
     if (user == "manager") {
-        window.location.href = "http://localhost:8080/EmployMe-0.0/login";
+        window.location.href = "http://localhost:8080/EmployMe-0.0/dashboardmanager";
     } else {
         window.location.href = "http://localhost:8080/EmployMe-0.0/dashboardemployee";
     }

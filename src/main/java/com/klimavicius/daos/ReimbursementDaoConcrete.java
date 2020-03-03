@@ -32,8 +32,8 @@ public class ReimbursementDaoConcrete implements ReimbursementDao {
 				int manager_id = rs.getInt("manager_id");				
 				String status = rs.getString("status");				
 				Double reimbursement = rs.getDouble("reimbursement");
-				Date createdAt = rs.getDate("created_at");
-				Date updatedAt = rs.getDate("updated_at");
+				Date createdAt = new Date(rs.getTimestamp("created_at").getTime());
+				Date updatedAt = new Date(rs.getTimestamp("updated_at").getTime());
 				
 				Reimbursement readReimbursement = new Reimbursement(reimbursement_id, employee_id, manager_id, status, reimbursement, createdAt, updatedAt);
 
@@ -64,8 +64,8 @@ public class ReimbursementDaoConcrete implements ReimbursementDao {
 				int manager_id = rs.getInt("manager_id");
 				String status = rs.getString("status");
 				Double reimbursement = rs.getDouble("reimbursement");
-				Date createdAt = rs.getDate("created_at");
-				Date updatedAt = rs.getDate("updated_at");
+				Date createdAt = new Date(rs.getTimestamp("created_at").getTime());
+				Date updatedAt = new Date(rs.getTimestamp("updated_at").getTime());
 
 				Reimbursement selectedReimbursement = new Reimbursement(reimbursement_id, employee_id, manager_id, status,
 						reimbursement, createdAt, updatedAt);
@@ -96,8 +96,8 @@ public class ReimbursementDaoConcrete implements ReimbursementDao {
 				int manager_id = rs.getInt("manager_id");
 				String status = rs.getString("status");
 				Double reimbursement = rs.getDouble("reimbursement");
-				Date createdAt = rs.getDate("created_at");
-				Date updatedAt = rs.getDate("updated_at");
+				Date createdAt = new Date(rs.getTimestamp("created_at").getTime());
+				Date updatedAt = new Date(rs.getTimestamp("updated_at").getTime());
 
 				Reimbursement selectedReimbursement = new Reimbursement(reimbursement_id, employee_id, manager_id,
 						status, reimbursement, createdAt, updatedAt);

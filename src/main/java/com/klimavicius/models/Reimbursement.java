@@ -1,6 +1,7 @@
 package com.klimavicius.models;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 
 public class Reimbursement {

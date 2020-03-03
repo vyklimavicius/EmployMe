@@ -59,16 +59,21 @@ public class AuthEmployeeDelegate {
         Auth authUser = objectMapper.readValue(body, Auth.class);
         String passPassword = authUser.getPassword();
         Employee currentEmployee = employeeService.getEmployeeByEmail(authUser.getEmail());
-        String userPassword = currentEmployee.getPassword();
-        if (BCrypt.checkpw(passPassword, userPassword)) {
-            System.out.println("Passwords matches!");
-            try (PrintWriter pw = resp.getWriter()) {
-                pw.write(new ObjectMapper().writeValueAsString(currentEmployee));
-            }
-            resp.setStatus(200);
+        if (currentEmployee == null){
+            System.out.println("resource not found");
+            resp.setStatus(404);
         } else {
-            System.out.println("Passwords don't match!");
-            resp.setStatus(401);
+            String userPassword = currentEmployee.getPassword();
+            if (BCrypt.checkpw(passPassword, userPassword)) {
+                System.out.println("Passwords matches!");
+                try (PrintWriter pw = resp.getWriter()) {
+                    pw.write(new ObjectMapper().writeValueAsString(currentEmployee));
+                }
+                resp.setStatus(200);
+            } else {
+                System.out.println("Passwords don't match!");
+                resp.setStatus(401);
+            }
         }
 
     }

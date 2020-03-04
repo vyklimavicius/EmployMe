@@ -1,9 +1,6 @@
 package com.klimavicius.daos;
 
 import java.util.List;
-
-import com.klimavicius.models.Employee;
-import com.klimavicius.models.Manager;
 import com.klimavicius.models.Reimbursement;
 
 public interface ReimbursementDao {

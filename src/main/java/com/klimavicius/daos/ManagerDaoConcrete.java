@@ -11,7 +11,11 @@ import java.util.List;
 import com.klimavicius.models.Manager;
 import com.klimavicius.util.ConnectionUtil;
 
+import org.apache.log4j.Logger;
+
 public class ManagerDaoConcrete implements ManagerDao {
+
+	private static Logger logger = Logger.getLogger(ManagerDaoConcrete.class);
 
 	public ManagerDaoConcrete() {
 		// TODO Auto-generated constructor stub
@@ -39,7 +43,8 @@ public class ManagerDaoConcrete implements ManagerDao {
 
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("Get managers exception", e);
+			// e.printStackTrace();
 		}
 
 		return managers;
@@ -64,7 +69,8 @@ public class ManagerDaoConcrete implements ManagerDao {
 				managerEmail = new Manager(managerId, firstName, lastName, email, password);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("Get manager by email exception", e);
+			// e.printStackTrace();
 		}
 
 		return managerEmail;
@@ -89,7 +95,8 @@ public class ManagerDaoConcrete implements ManagerDao {
 				manager = new Manager(managerId, firstName, lastName, email, password);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("Get manager by id exception", e);
+			// e.printStackTrace();
 		}
 
 		return manager;
@@ -107,10 +114,12 @@ public class ManagerDaoConcrete implements ManagerDao {
 			ps.setString(4, m.getPassword());
 			ResultSet rs = ps.executeQuery();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("Create manager exception", e);
+			// e.printStackTrace();
 		}
 
-		System.out.println("New Manager created!");
+		logger.info("New manager created!");
+		// System.out.println("New Manager created!");
 		return 0;
 
 	}

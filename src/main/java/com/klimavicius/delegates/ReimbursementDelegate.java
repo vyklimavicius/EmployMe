@@ -15,8 +15,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.klimavicius.models.Reimbursement;
 import com.klimavicius.services.ReimbursementService;
 
+import org.apache.log4j.Logger;
+
 public class ReimbursementDelegate {
 
+    final static Logger logger = Logger.getLogger(ReimbursementDelegate.class);
     private ReimbursementService reimbursementService = new ReimbursementService();
 
     public void getAllReimbursements(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,7 +35,8 @@ public class ReimbursementDelegate {
     public void createReimbursement(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        System.out.println("I'm in create reimbursement");
+        logger.info("I'm in create reimbursement");
+        // System.out.println("I'm in create reimbursement");
         String body = null;
         StringBuilder stringBuilder = new StringBuilder();
         BufferedReader bufferedReader = null;
@@ -57,15 +61,16 @@ public class ReimbursementDelegate {
                 try {
                     bufferedReader.close();
                 } catch (IOException ex) {
+                    logger.error("Reimbursement Delegate exception", ex);
                     throw ex;
                 }
             }
         }
 
         body = stringBuilder.toString();
-        System.out.println(body);
         Reimbursement newReimbursement = objectMapper.readValue(body, Reimbursement.class);
-        System.out.println(newReimbursement);
+        logger.info("Reimbursement to be created");
+        // System.out.println(newReimbursement);
         reimbursementService.createReimbursement(newReimbursement);
         resp.setStatus(201);
     }
@@ -73,7 +78,8 @@ public class ReimbursementDelegate {
     public void updateReimbursement(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        System.out.println("I'm in update reimbursement!");
+        logger.info("I'm in update reimbursement!");
+        // System.out.println("I'm in update reimbursement!");
         String body = null;
         StringBuilder stringBuilder = new StringBuilder();
         BufferedReader bufferedReader = null;
@@ -99,6 +105,7 @@ public class ReimbursementDelegate {
                 try {
                     bufferedReader.close();
                 } catch (IOException ex) {
+                    logger.error("Reimbursement Delegate exception", ex);
                     throw ex;
                 }
             }
@@ -111,7 +118,8 @@ public class ReimbursementDelegate {
         Reimbursement updateReimbursement = reimbursementService.getReimbursementById(newReimbursement.getReimbursementId());
         updateReimbursement.setManagerId(managerId);
         updateReimbursement.setStatus(status);
-        System.out.println(updateReimbursement);
+        logger.info("Reimbursement to be updated " + updateReimbursement);
+        // System.out.println(updateReimbursement);
         reimbursementService.updateReimbursement(updateReimbursement);
         resp.setStatus(200);
     }

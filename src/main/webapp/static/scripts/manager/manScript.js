@@ -225,7 +225,7 @@ const viewReimbursements = () => {
   </table>`;
   let maintable = document.querySelector("#reimbursement-table");
   let filteredReimbursements = reimbursements.filter(r => {
-    return r.status == "pending";
+    return r.status == "Pending";
   });
   
   filteredReimbursements.forEach(r => {

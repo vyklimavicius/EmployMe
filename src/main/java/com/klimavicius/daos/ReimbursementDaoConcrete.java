@@ -1,16 +1,19 @@
 package com.klimavicius.daos;
 
 import java.sql.*;
-import java.text.DateFormat;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import com.klimavicius.models.Employee;
-import com.klimavicius.models.Manager;
+
 import com.klimavicius.models.Reimbursement;
 import com.klimavicius.util.ConnectionUtil;
 
+import org.apache.log4j.Logger;
+
 public class ReimbursementDaoConcrete implements ReimbursementDao {
+
+	private static Logger logger = Logger.getLogger(ReimbursementDaoConcrete.class);
 
 	public ReimbursementDaoConcrete() {
 		// TODO Auto-generated constructor stub
@@ -41,7 +44,8 @@ public class ReimbursementDaoConcrete implements ReimbursementDao {
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Get reimbursements exception", e);
+			// e.printStackTrace();
 		}
 
 		return reimbursements;
@@ -74,7 +78,8 @@ public class ReimbursementDaoConcrete implements ReimbursementDao {
 			}
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Get reimbursement by employee id", e);
+			// e.printStackTrace();
 		}
 
 		return selectedReimbursements;
@@ -106,7 +111,8 @@ public class ReimbursementDaoConcrete implements ReimbursementDao {
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error("Get reimbursements by manager id");
+			// e.printStackTrace();
 		}
 
 		return selectedReimbursements;
@@ -124,9 +130,11 @@ public class ReimbursementDaoConcrete implements ReimbursementDao {
 			ps.setDouble(4, r.getReimbursement());
 			ResultSet rs = ps.executeQuery();
 		} catch (SQLException x) {
-			x.printStackTrace();
+			logger.error("Create reimbursement exception", x);
+			// x.printStackTrace();
 		}
 
+		logger.info("Reimbursement created");
 		return 0;
 
 	}
@@ -198,10 +206,12 @@ public class ReimbursementDaoConcrete implements ReimbursementDao {
 			ps.setInt(3, reimbursement_id);
 			ResultSet rs = ps.executeQuery();
 		} catch (SQLException x) {
-			x.printStackTrace();
+			logger.error("Reimbursement update exception", x);
+			// x.printStackTrace();
 		}
 
-		System.out.println("Reimbursement updated!");
+		// System.out.println("Reimbursement updated!");
+		logger.info("Reimbursement updated!");
 		return 0;
 	}
 
@@ -232,6 +242,7 @@ public class ReimbursementDaoConcrete implements ReimbursementDao {
 			}
 
 		} catch (Exception e) {
+			logger.error("Get reimbursememnt by id exception", e);
 			e.printStackTrace();
 		}
 

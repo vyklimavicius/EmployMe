@@ -6,14 +6,19 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 // For static files
 public class ViewDelegate {
+
+    final static Logger logger = Logger.getLogger(ViewDelegate.class);
 
     public void resolveView(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
         String uri = req.getServletPath();
-        System.out.println("view delegate: " + uri);
+        logger.info("view delegate: " + uri);
+        // System.out.println("view delegate: " + uri);
 
         switch (uri) {
             case "/signup":

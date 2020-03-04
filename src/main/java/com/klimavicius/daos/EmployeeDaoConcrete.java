@@ -10,7 +10,11 @@ import java.util.List;
 import com.klimavicius.models.Employee;
 import com.klimavicius.util.ConnectionUtil;
 
+import org.apache.log4j.Logger;
+
 public class EmployeeDaoConcrete implements EmployeeDao{
+
+	final static Logger logger = Logger.getLogger(EmployeeDaoConcrete.class);
 
 	public EmployeeDaoConcrete() {
 		// TODO Auto-generated constructor stub
@@ -37,7 +41,8 @@ public class EmployeeDaoConcrete implements EmployeeDao{
 
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("Getting employee exception", e);
+			// e.printStackTrace();
 		}
 
 		return employees;
@@ -62,7 +67,8 @@ public class EmployeeDaoConcrete implements EmployeeDao{
 				employeeEmail = new Employee(employeeId, firstName, lastName, email, password);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("Getting employee by email exception", e);
+			// e.printStackTrace();
 		}
 
 		return employeeEmail;
@@ -87,7 +93,8 @@ public class EmployeeDaoConcrete implements EmployeeDao{
 				employee = new Employee(employeeId, firstName, lastName, email, password);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("Getting employee by id exception", e);
+			// e.printStackTrace();
 		}
 
 		return employee;
@@ -104,7 +111,8 @@ public class EmployeeDaoConcrete implements EmployeeDao{
 			ps.setString(4, e.getPassword());
 			ResultSet rs = ps.executeQuery();
 		} catch (SQLException x) {
-			x.printStackTrace();
+			logger.error("Create employee exception", x);
+			// x.printStackTrace();
 		}
 		
 		System.out.println("New Employee created!");
@@ -124,10 +132,13 @@ public class EmployeeDaoConcrete implements EmployeeDao{
 			ps.setInt(4, employee_id);
 			ResultSet rs = ps.executeQuery();
 		} catch (SQLException x) {
-			x.printStackTrace();
+			logger.error("Update employee exception", x);
+			// x.printStackTrace();
 		}
 
-		System.out.println("Employee updated!");
+		logger.info("Employee updated!");
+		// System.out.println("Employee updated!");
+
 		// switch (value) {
 		// 	case "firstname":
 		// 		sql = "update employees set firstname = ? where employee_id = ?";
@@ -184,7 +195,8 @@ public class EmployeeDaoConcrete implements EmployeeDao{
 			ps.setInt(1, employee_id);
 			ps.execute(sql);
 		} catch (SQLException x) {
-			x.printStackTrace();
+			logger.error("Delete employee exception", x);
+			// x.printStackTrace();
 		}
 		return 0;
 	}

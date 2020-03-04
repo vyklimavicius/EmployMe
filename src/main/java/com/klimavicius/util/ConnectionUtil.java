@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 public class ConnectionUtil {
 
+    final static Logger logger = Logger.getLogger(ConnectionUtil.class);
     private static Connection connection;
 
     public static Connection getConnection() throws SQLException {
@@ -19,7 +22,8 @@ public class ConnectionUtil {
             try {
                 Class.forName("org.postgresql.Driver");
             } catch (ClassNotFoundException ex) {
-                System.out.println("Error: unable to load driver class!");
+                logger.error("Error: unable to load driver class!", ex);
+                // System.out.println("Error: unable to load driver class!");
                 System.exit(1);
             }
             // Start connection

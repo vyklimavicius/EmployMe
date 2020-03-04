@@ -5,21 +5,25 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
-import java.util.Arrays;
+
 import java.util.List;
-import java.util.Map;
+
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.fasterxml.jackson.core.JsonParser;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.klimavicius.models.Manager;
 import com.klimavicius.services.ManagerService;
 
+import org.apache.log4j.Logger;
+
 public class ManagerDelegate{
 
+
+    final static Logger logger = Logger.getLogger(ManagerDelegate.class);
     private ManagerService managerService = new ManagerService();
 
     public void getAllManagers(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -34,7 +38,8 @@ public class ManagerDelegate{
     public void createManager(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        System.out.println("I'm in create manager");
+        logger.info("I'm in create manager");
+        // System.out.println("I'm in create manager");
         String body = null;
         StringBuilder stringBuilder = new StringBuilder();
         BufferedReader bufferedReader = null;
@@ -59,15 +64,16 @@ public class ManagerDelegate{
                 try {
                     bufferedReader.close();
                 } catch (IOException ex) {
+                    logger.error("Manager Delegate exception", ex);
                     throw ex;
                 }
             }
         }
 
         body = stringBuilder.toString();
-        System.out.println(body);
         Manager newManager = objectMapper.readValue(body, Manager.class);
-        System.out.println(newManager);
+        logger.info("Manager to be created " + newManager);
+        // System.out.println(newManager);
         managerService.createManager(newManager);
         resp.setStatus(201);
     }

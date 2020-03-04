@@ -15,9 +15,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.klimavicius.models.Employee;
 import com.klimavicius.services.EmployeeService;
 
+import org.apache.log4j.Logger;
+
 public class EmployeeDelegate {
 
-
+    final static Logger logger = Logger.getLogger(EmployeeDelegate.class);
     private EmployeeService employeeService = new EmployeeService();
 
     public void getAllEmployees(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,7 +34,8 @@ public class EmployeeDelegate {
     public void createEmployee(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        System.out.println("I'm in create employee");
+        logger.info("I'm in create employee!");
+        // System.out.println("I'm in create employee");
         String body = null;
         StringBuilder stringBuilder = new StringBuilder();
         BufferedReader bufferedReader = null;
@@ -58,6 +61,7 @@ public class EmployeeDelegate {
             try {
                 bufferedReader.close();
             } catch (IOException ex) {
+                logger.error("Employee delegate exception", ex);
                 throw ex;
             }
         }
@@ -66,12 +70,14 @@ public class EmployeeDelegate {
     body = stringBuilder.toString();
     Employee newEmployee = objectMapper.readValue(body, Employee.class);
     Employee currentEmployee = employeeService.getEmployeeByEmail(newEmployee.getEmail());
-    System.out.println(newEmployee);
+    logger.info("New employee " + newEmployee);
+    // System.out.println(newEmployee);
     if (currentEmployee != null) {
-        System.out.println("Unprocessable Entity");
+        logger.info("Unprocessable Entity");
+        // System.out.println("Unprocessable Entity");
         resp.setStatus(422);
     } else {
-        System.out.println(newEmployee);
+        // System.out.println(newEmployee);
         employeeService.createEmployee(newEmployee);
         resp.setStatus(201);
     }
@@ -80,7 +86,8 @@ public class EmployeeDelegate {
    public void updateEmployee(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
        ObjectMapper objectMapper = new ObjectMapper();
-       System.out.println("I'm in update employee");
+       logger.info("I'm in update employee");
+       // System.out.println("I'm in update employee");
        String body = null;
        StringBuilder stringBuilder = new StringBuilder();
        BufferedReader bufferedReader = null;
@@ -106,6 +113,7 @@ public class EmployeeDelegate {
                try {
                    bufferedReader.close();
                } catch (IOException ex) {
+                   logger.error("Employee Delegate exception", ex);
                    throw ex;
                }
            }
@@ -113,7 +121,8 @@ public class EmployeeDelegate {
 
        body = stringBuilder.toString();
        Employee newEmployee = objectMapper.readValue(body, Employee.class);
-       System.out.println(newEmployee);
+       logger.info("Employee to be updated" + newEmployee);
+       //    System.out.println(newEmployee);
        employeeService.updateEmployee(newEmployee);
        resp.setStatus(200);
    }

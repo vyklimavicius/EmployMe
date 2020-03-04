@@ -15,15 +15,18 @@ import com.klimavicius.models.Auth;
 import com.klimavicius.models.Employee;
 import com.klimavicius.services.EmployeeService;
 
+import org.apache.log4j.Logger;
 import org.mindrot.jbcrypt.BCrypt;
 
 public class AuthEmployeeDelegate {
 
+    final static Logger logger = Logger.getLogger(AuthEmployeeDelegate.class);
 
     public void authentication(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        System.out.println("I'm in authentication");
+        logger.info("I'm in authentication");
+        // System.out.println("I'm in authentication");
         String body = null;
         StringBuilder stringBuilder = new StringBuilder();
         BufferedReader bufferedReader = null;
@@ -48,6 +51,7 @@ public class AuthEmployeeDelegate {
                 try {
                     bufferedReader.close();
                 } catch (IOException ex) {
+                    logger.error("Authentication employee exception", ex);
                     throw ex;
                 }
             }
@@ -58,18 +62,21 @@ public class AuthEmployeeDelegate {
         String passPassword = authUser.getPassword();
         Employee currentEmployee = employeeService.getEmployeeByEmail(authUser.getEmail());
         if (currentEmployee == null){
-            System.out.println("resource not found");
+            logger.info("resource not found");
+            // System.out.println("resource not found");
             resp.setStatus(404);
         } else {
             String userPassword = currentEmployee.getPassword();
             if (BCrypt.checkpw(passPassword, userPassword)) {
-                System.out.println("Passwords matches!");
+                logger.info("Password matches!");
+                // System.out.println("Passwords matches!");
                 try (PrintWriter pw = resp.getWriter()) {
                     pw.write(new ObjectMapper().writeValueAsString(currentEmployee));
                 }
                 resp.setStatus(200);
             } else {
-                System.out.println("Passwords don't match!");
+                logger.info("Passwords don't match!");
+                // System.out.println("Passwords don't match!");
                 resp.setStatus(401);
             }
         }

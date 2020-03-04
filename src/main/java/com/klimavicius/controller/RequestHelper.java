@@ -1,6 +1,5 @@
 package com.klimavicius.controller;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -55,12 +54,9 @@ public class RequestHelper {
 		if (path.startsWith("/api/")) {
 
 			String url = path.substring(5);
-			// BufferedReader body = req.getReader();
-			// System.out.println(body);
-
+	
 			switch (url) {
 				case "employees":
-					// resp.sendError(404, "Working on it");
 					employeeDelegate.createEmployee(req, resp);
 					break;
 				case "managers":

@@ -65,6 +65,7 @@ public class ManagerDelegate{
                     bufferedReader.close();
                 } catch (IOException ex) {
                     logger.error("Manager Delegate exception", ex);
+                    resp.setStatus(422);
                     throw ex;
                 }
             }

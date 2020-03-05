@@ -126,9 +126,9 @@ const viewManagers = () => {
                     <thead>
                         <tr>
                             <th style="color: #cc9900; scope="col">#</th>
-                            <th style="color: #cc9900; scope="col">firstname</th>
-                            <th style="color: #cc9900; scope="col">lastname</th>
-                            <th style="color: #cc9900; scope="col">email</th>
+                            <th style="color: #cc9900; scope="col">Firstname</th>
+                            <th style="color: #cc9900; scope="col">Lastname</th>
+                            <th style="color: #cc9900; scope="col">Email</th>
                         </tr>
                     </thead>
                     <tbody id="managers-table">
@@ -156,9 +156,9 @@ const viewEmployees = () => {
                     <thead>
                         <tr>
                             <th style="color: #cc9900; scope="col">#</th>
-                            <th style="color: #cc9900; scope="col">firstname</th>
-                            <th style="color: #cc9900; scope="col">lastname</th>
-                            <th style="color: #cc9900; scope="col">email</th>
+                            <th style="color: #cc9900; scope="col">Firstname</th>
+                            <th style="color: #cc9900; scope="col">Lastname</th>
+                            <th style="color: #cc9900; scope="col">Email</th>
                         </tr>
                     </thead>
                     <tbody id="employees-table">
@@ -190,8 +190,9 @@ const showfilterReimbursements = () => {
                     <thead>
                         <tr>
                             <th style="color: #cc9900;" scope="col">#</th>
-                            <th style="color: #cc9900;" scope="col">reimbursement</th>
-                            <th style="color: #cc9900;" scope="col">status</th>
+                            <th style="color: #cc9900;" scope="col">Reimbursement</th>
+                            <th style="color: #cc9900;" scope="col">Type</th>
+                            <th style="color: #cc9900;" scope="col">Status</th>
                         </tr>
                     </thead>
                     <tbody id="reimbursement-table">
@@ -214,8 +215,9 @@ const viewReimbursements = () => {
   <tr>
   <th style="color: #cc9900;" scope="col">#</th>
   <th style="color: #cc9900;" scope="col">EmployeeId</th>
-  <th style="color: #cc9900;" scope="col">reimbursement</th>
-  <th style="color: #cc9900;" scope="col">status</th>
+  <th style="color: #cc9900;" scope="col">Reimbursement</th>
+  <th style="color: #cc9900;" scope="col">Type</th>
+  <th style="color: #cc9900;" scope="col">Status</th>
   <th style="color: #cc9900;" scope="col">Approve</th>
   <th style="color: #cc9900;" scope="col">Deny</th>
   </tr>
@@ -233,6 +235,7 @@ const viewReimbursements = () => {
     <th scope="row">${r.reimbursementId}</th>
     <th scope="row">${r.employeeId}</th>
     <td>$${r.reimbursement}</td>
+    <td>${r.type}</td>
     <td>${r.status}</td>
     <td><button onclick="clickReimbursement(event)" type="button" class="btn btn-warning" style="color: #cc9900; font-size: 1vw; background-color: antiquewhite; border-color: antiquewhite;">Approved</button></td>
     <td><button onclick="clickReimbursement(event)" type="button" class="btn btn-warning" style="color: #cc9900; font-size: 1vw; background-color: antiquewhite; border-color: antiquewhite;">Deny</button></td>
@@ -254,8 +257,9 @@ const viewApproved = () => {
       <tr>
         <th style="color: #cc9900;" scope="col">#</th>
         <th style="color: #cc9900;" scope="col">EmployeeId</th>
-        <th style="color: #cc9900;" scope="col">reimbursement</th>
-        <th style="color: #cc9900;" scope="col">status</th>
+        <th style="color: #cc9900;" scope="col">Reimbursement</th>
+        <th style="color: #cc9900;" scope="col">Type</th>
+        <th style="color: #cc9900;" scope="col">Status</th>
         <th style="color: #cc9900;" scope="col">Manager</th>
       </tr>
     </thead>
@@ -272,6 +276,7 @@ const viewApproved = () => {
                                     <th scope="row">${r.reimbursementId}</th>
                                     <th scope="row">${r.employeeId}</th>
                                     <td>$${r.reimbursement}</td>
+                                    <td>${r.type}</td>
                                     <td>${r.status}</td>
                                     <td>${r.managerId}</td>
                                 </tr>`);
@@ -294,8 +299,9 @@ const viewDenied = () => {
       <tr>
         <th style="color: #cc9900;" scope="col">#</th>
         <th style="color: #cc9900;" scope="col">EmployeeId</th>
-        <th style="color: #cc9900;" scope="col">reimbursement</th>
-        <th style="color: #cc9900;" scope="col">status</th>
+        <th style="color: #cc9900;" scope="col">Reimbursement</th>
+        <th style="color: #cc9900;" scope="col">Type</th>
+        <th style="color: #cc9900;" scope="col">Status</th>
         <th style="color: #cc9900;" scope="col">Manager</th>
       </tr>
     </thead>
@@ -312,6 +318,7 @@ const viewDenied = () => {
                                     <th scope="row">${r.reimbursementId}</th>
                                     <th scope="row">${r.employeeId}</th>
                                     <td>$${r.reimbursement}</td>
+                                    <td>${r.type}</td>
                                     <td>${r.status}</td>
                                     <td>${r.managerId}</td>
                                 </tr>`);
@@ -340,6 +347,7 @@ const filterReimbursements = (e) => {
         return (maintable.innerHTML += `<tr>
                                     <th scope="row">${r.reimbursementId}</th>
                                     <td>$${r.reimbursement}</td>
+                                    <td>${r.type}</td>
                                     <td>${r.status}</td>
                                 </tr>`);
     });

@@ -9,13 +9,13 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
         rel="stylesheet">
@@ -40,6 +40,24 @@
             <a class="navbar-brand" href="#" onclick="logOut()" style="font-size: 1.5vw; color:#cc9900">Logout</a>
         </div>
     </nav>
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 style="font-family: 'Lobster'; color: #cc9900; font-size: 5vw;" class="modal-title"
+                        id="exampleModalLabel">Sorry</h5>
+                </div>
+                <div style="background-color: antiquewhite;" id="modal-message" class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button style="color: #cc9900; border: 1px solid #cc9900; background-color: antiquewhite;" type="button"
+                        class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <section id="main-card" style="position: absolute; top: 10vh; height: 40vh; width: 70vw; bottom: 50vh; left: 21vw;">
         <div style="margin-top: 30vh; margin-left: 32vw;" class="spinner-border text-warning" role="status">
             <span class="sr-only">Loading...</span>
@@ -48,3 +66,5 @@
     <script src="http://localhost:8080/EmployMe-0.0/static/scripts/employee/empScript.js"></script>
 </body>
 </html>
+<!-- http://localhost:8080/EmployMe-0.0/static/scripts/employee/empScript.js -->
+<!-- ../scripts/employee/empScript.js -->

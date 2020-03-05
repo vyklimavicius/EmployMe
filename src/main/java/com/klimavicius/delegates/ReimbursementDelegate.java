@@ -71,8 +71,12 @@ public class ReimbursementDelegate {
         Reimbursement newReimbursement = objectMapper.readValue(body, Reimbursement.class);
         logger.info("Reimbursement to be created");
         // System.out.println(newReimbursement);
-        reimbursementService.createReimbursement(newReimbursement);
-        resp.setStatus(201);
+        if (newReimbursement.getType() == null){
+            resp.setStatus(404);
+        } else {
+            reimbursementService.createReimbursement(newReimbursement);
+            resp.setStatus(201);
+        }
     }
 
     public void updateReimbursement(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

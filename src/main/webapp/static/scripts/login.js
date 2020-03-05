@@ -31,10 +31,16 @@ const sendMethod = (url, body, callback, user) => {
             console.info('%c Form was submitted succesfully!!', 'background: green; color: white; display: block;'); 
             callback(request.response, user);
         } else if(request.status == 401){
-            alert("password don't match!");
+            // alert("password don't match!");
+            let modalBody = document.querySelector('#modal-message');
+            modalBody.innerHTML = `<h2 style="color: #cc9900; font-size: 1vw">Password don't match</h2>`;
+            $("#exampleModal").modal("toggle");
             console.error("401...");
         } else if (request.status == 404){
-            alert("That email doesn't exists!")
+            // alert("That email doesn't exists!")
+            let modalBody = document.querySelector("#modal-message");
+            modalBody.innerHTML = `<h2 style="color: #cc9900; font-size: 1vw">That email doesn't exists!</h2>`;
+            $("#exampleModal").modal("toggle");
             console.error("404...");
         }
     }

@@ -2,6 +2,7 @@ console.log('%c Welcome to V\'s console', 'background: #cc9900; color: white; di
 const currentUser = JSON.parse(localStorage.getItem("session"));
 const url = "http://localhost:8080/EmployMe-0.0/api/reimbursements";
 let reimbursements;
+let selection;
 
 // Check token
 
@@ -64,9 +65,14 @@ const showProfile = () => {
 const addReimbursement = () => {
     let mainCard = document.querySelector('#main-card');
     mainCard.innerHTML = "";
-    mainCard.innerHTML = `<form id="reimbursement-form" onsubmit="onSubmit(event)" style="height: 80vh; border: 1px solid #cc9900; box-shadow: 5px 10px antiquewhite;">
+    mainCard.innerHTML = `<form id="reimbursement-form" onsubmit="onSubmit(event)" style="height: 85vh; border: 1px solid #cc9900; box-shadow: 5px 10px antiquewhite;">
+            <div class="card-title" style="text-align: center;">
             <h3 style="margin-top: 2vh; text-align: center; font-size: 3vw; color:#cc9900;">Add reimbursement</h3>
-            <br>
+            <label class="card-title" style="width: 20vw; height: 2vh; font-size: 2vw; color:#cc9900;"
+                    for="reimbursement">Type:</label>
+                <br>
+                <h3 id="type-status" style="margin-top: 2vh; text-align: center; font-size: 2vw; color:#cc9900;"></h3>
+            </div>
             <div class="card-title" style="text-align: center;">
                 <label class="card-title" style="margin-top: 6vh; width: 20vw; height: 2vh; font-size: 2vw; color:#cc9900;" for="reimbursement">Please type Amount $:</label>
                 <br>
@@ -78,13 +84,23 @@ const addReimbursement = () => {
                     style="margin-top: 10px; width: 10vw; height: 8vh; font-size: 2vw; color: #cc9900; background-color: antiquewhite; border-color: antiquewhite;"
                     class="btn btn-primary" type="submit">
             </div>
+            <div class="btn-group">
+              <button style="margin-left: 45vw; margin-top: 12px; width: 10vw; height: 8vh; font-size: 2vw; color: #cc9900; background-color: antiquewhite; border-color: antiquewhite;" type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Type
+              </button>
+              <div style="background-color: white" id="type" class="dropdown-menu" required>
+              <a onclick="handleDropDown(event)" style="color: #cc9900; font-size: 1vw; background-color: white" class="dropdown-item" href="#">Relocation</a>
+              <a onclick="handleDropDown(event)" style="color: #cc9900; font-size: 1vw; background-color: white" class="dropdown-item" href="#">Traveling</a>
+              <a onclick="handleDropDown(event)" style="color: #cc9900; font-size: 1vw; background-color: white" class="dropdown-item" href="#">Miscellaneous</a>
+            </div>
+           </div>
             <div class="card-title" style="text-align: center;">
-                <label class="card-title" style="margin-top: 6vh; width: 20vw; height: 2vh; font-size: 2vw; color:#cc9900;"
+                <label class="card-title" style="width: 20vw; height: 2vh; font-size: 2vw; color:#cc9900;"
                     for="reimbursement">Status:</label>
                 <br>
                 <h3 style="margin-top: 2vh; text-align: center; font-size: 3vw; color:#cc9900;">Pending</h3>
             </div>
-        </form>`
+        </form>`;
 };
 
 const viewReimbursements = () => {
@@ -102,8 +118,9 @@ const viewReimbursements = () => {
                     <thead>
                         <tr>
                             <th style="color: #cc9900;" scope="col">#</th>
-                            <th style="color: #cc9900;" scope="col">reimbursement</th>
-                            <th style="color: #cc9900;" scope="col">status</th>
+                            <th style="color: #cc9900;" scope="col">Reimbursement</th>
+                            <th style="color: #cc9900;" scope="col">Type</th>
+                            <th style="color: #cc9900;" scope="col">Status</th>
                         </tr>
                     </thead>
                     <tbody id="reimbursement-table">
@@ -118,6 +135,7 @@ const viewReimbursements = () => {
             return (maintable.innerHTML += `<tr>
                                 <th scope="row">${r.reimbursementId}</th>
                                 <td>$${r.reimbursement}</td>
+                                <td>${r.type}</td>
                                 <td>${r.status}</td>
                             </tr>`);
         });
@@ -130,6 +148,11 @@ const logOut = () => {
 };
 
 // controller functions 
+const handleDropDown = (e) => {
+    selection = e.target.innerText;
+    let typeStatus = document.querySelector('#type-status');
+    typeStatus.innerText = selection;
+};
 
 const onSubmit = (e) => {
     e.preventDefault();
@@ -138,10 +161,12 @@ const onSubmit = (e) => {
         employeeId: currentUser.id,
         reimbursement: reimbursement,
         status: "Pending",
+        type: selection,
         managerId: 1
     }
     document.querySelector('#reimbursement-form').reset();
     sendMethod(url, body);
+    selection = null;
 };
 
 const sendMethod = (url, body) => {
@@ -152,7 +177,10 @@ const sendMethod = (url, body) => {
         if (request.status == 201) {
             console.log(request.responseText);
             console.info('%c Form was submitted succesfully!!', 'background: green; color: white; display: block;');
-        } else {
+        } else if(request.status == 404){
+            let modalBody = document.querySelector("#modal-message");
+            modalBody.innerHTML = `<h2 style="color: #cc9900; font-size: 1vw">Please insert a Type!</h2>`;
+            $("#exampleModal").modal("toggle");
             console.error("Form was not submitted succesfully...");
         }
     }

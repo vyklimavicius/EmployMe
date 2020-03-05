@@ -87,7 +87,7 @@ public class MainTest {
 	public void getManagerById() {
 		boolean check = false;
 		ManagerService managerController = new ManagerService();
-		Manager actual = managerController.getManagerById(3);
+		Manager actual = managerController.getManagerById(1);
 		if (actual.getClass() == Manager.class) {
 			check = true;
 		}
@@ -110,7 +110,7 @@ public class MainTest {
 	@Test
 	public void createReimbursement() {
 		ReimbursementService reimbursementController = new ReimbursementService();
-		Reimbursement reimbursementTest = new Reimbursement(200, 200, 200, "Resolved", 2000.0, null, null);
+		Reimbursement reimbursementTest = new Reimbursement(200, 200, 200, "Resolved", "Relocation", 2000.0, null, null);
 		int actual = reimbursementController.createReimbursement(reimbursementTest);
 		int expected = 0;
 		assertEquals(expected, actual);
@@ -119,10 +119,21 @@ public class MainTest {
 	@Test
 	public void updateReimbursement() {
 		ReimbursementService reimbursementController = new ReimbursementService();
-		Reimbursement reimbursementTest = new Reimbursement(200, 200, 200, "Resolved", 2000.0, null, null);
+		Reimbursement reimbursementTest = new Reimbursement(200, 200, 200, "Resolved", "Relocation", 2000.0, null, null);
 		int actual = reimbursementController.updateReimbursement(reimbursementTest);
 		int expected = 0;
 		assertEquals(expected, actual);
+	}
+
+	@Test
+	public void getReimbursementById() {
+		boolean check = false;
+		ReimbursementService reimbursementController = new ReimbursementService();
+		Reimbursement actual = reimbursementController.getReimbursementById(2);
+		if (actual.getClass() == Reimbursement.class) {
+			check = true;
+		}
+		assertTrue(check);
 	}
 
 

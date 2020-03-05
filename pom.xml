@@ -10,6 +10,10 @@
   <properties>
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
+    <sonar.projectKey>vyklimavicius_EmployMe</sonar.projectKey>
+    <sonar.organization>vyklimavicius</sonar.organization>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.login>2381f3507e733ff9422b550525f979fe6d934e0b</sonar.login>
   </properties>
 
   <dependencies>
@@ -54,6 +58,12 @@
       <groupId>log4j</groupId>
       <artifactId>log4j</artifactId>
       <version>1.2.17</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.sonarsource.scanner.maven</groupId>
+      <artifactId>sonar-maven-plugin</artifactId>
+      <version>3.7.0.1746</version>
     </dependency>
 
 

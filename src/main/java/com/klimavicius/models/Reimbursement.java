@@ -1,14 +1,13 @@
 package com.klimavicius.models;
 
 import java.sql.Date;
-import java.sql.Timestamp;
-import java.text.DateFormat;
 
 public class Reimbursement {
 	
 
 	int reimbursementId, employeeId, managerId;
 	String status;
+	String type;
 	Double reimbursement;
 	Date createdAt;
 	Date updatedAt;
@@ -16,7 +15,8 @@ public class Reimbursement {
 	@Override
 	public String toString() {
 		return "Reimbursement [reimbursementId=" + reimbursementId + ", employeeId=" + employeeId + ", managerId=" + managerId + ", status="
-				+ status + ", reimbursement=" + reimbursement + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
+				+ status + ", type=" + type
+				+ ", reimbursement=" + reimbursement + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + "]";
 	}
 
 	// default constructor
@@ -31,11 +31,12 @@ public class Reimbursement {
 		this.reimbursement = reimbursement;
 	}
 
-	public Reimbursement(int reimbursementId, int employeeId, int managerId, String status, Double reimbursement, Date createdAt, Date updatedAt) {
+	public Reimbursement(int reimbursementId, int employeeId, int managerId, String status, String type, Double reimbursement, Date createdAt, Date updatedAt) {
 		this.reimbursementId = reimbursementId;
 		this.employeeId = employeeId;
 		this.managerId = managerId;
 		this.status = status;
+		this.type = type;
 		this.reimbursement = reimbursement;
 		this.createdAt = createdAt;
 		this.updatedAt = updatedAt;
@@ -91,6 +92,14 @@ public class Reimbursement {
 
 	public Date getUpdatedAt() {
 		return updatedAt;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	

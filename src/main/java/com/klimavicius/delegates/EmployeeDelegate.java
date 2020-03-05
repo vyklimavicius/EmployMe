@@ -114,6 +114,7 @@ public class EmployeeDelegate {
                    bufferedReader.close();
                } catch (IOException ex) {
                    logger.error("Employee Delegate exception", ex);
+                   resp.setStatus(422);
                    throw ex;
                }
            }
